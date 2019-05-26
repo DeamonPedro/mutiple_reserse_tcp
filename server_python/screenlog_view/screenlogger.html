@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SCREEN</title>
+</head>
+<body bgcolor="#000000" style="height: 100%;width: 100%;position: absolute;margin: 0px;display: inline-flex;align-items: center;">
+    <img id="screen" style="position:relative;width:100%;margin: 0 auto;" >
+    <div id="drop_zone" style="position:absolute;width:100%;margin: 0 auto; background-color:#0000;color:#ff3333;height:100%;left:0px;top:0px;text-align: center;line-height: 10;font-size:50px;">Escolha a o Screenlog</div>
+    <script>
+        name = "";
+        window.setInterval(atualiza,500);
+        function handleFileSelect(evt) {
+            evt.stopPropagation();
+            evt.preventDefault();
+            name = evt.dataTransfer.files[0].name;
+            document.getElementById('drop_zone').innerText = "";
+        }
+        function handleDragOver(evt) {
+            evt.stopPropagation();
+            evt.preventDefault();
+            evt.dataTransfer.dropEffect = 'copy';
+        }
+        var dropZone = document.getElementById('drop_zone');
+        dropZone.addEventListener('dragover', handleDragOver, false);
+        dropZone.addEventListener('drop', handleFileSelect, false);
+        function atualiza(){
+            var img = document.getElementById("screen");
+            if (name!=""){
+                img.srcset = name + "?" +new Date().getTime();
+            }
+        }
+</script>
+
+</body>
+</html>
